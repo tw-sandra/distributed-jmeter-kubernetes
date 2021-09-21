@@ -1,0 +1,16 @@
+imageCredentials:
+  registry: docker.com
+  #pullSecrets: docker-registry-secrets
+  # username: docker_user
+  # password: docker_user_password
+# docker image for master and slaves
+images:
+  master:
+    repo:  kubernautslabs/jmeter_master
+    tag: latest
+    pullPolicy: Always
+  slave:
+    repo:  kubernautslabs/jmeter_slave
+    tag: latest
+    pullPolicy: Always
+    replica: 2
