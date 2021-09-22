@@ -1,32 +1,32 @@
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: jmeter-master
+  name: {{ .Values.images.master.name }}
   labels:
-    jmeter_mode: master
+    jmeter_mode: "{{ .Values.images.master.jmeter_mode }}"
 spec:
-  replicas: 1
+  replicas: {{ .Values.images.master.replica }}
   selector:
     matchLabels:
-      jmeter_mode: master
+      jmeter_mode: {{ .Values.images.master.jmeter_mode }}
   template:
     metadata:
       labels:
-        jmeter_mode: master
+        jmeter_mode: {{ .Values.images.master.jmeter_mode }}
     spec:
       containers:
-      - name: jmmaster
+      - name: jmeter-{{ .Values.images.master.jmeter_mode }}
         image: '{{ .Values.images.master.repo }}:{{ .Values.images.master.tag }}'
         imagePullPolicy: {{ .Values.images.master.pullPolicy }}
         command: [ "/bin/bash", "-c", "--" ]
         args: [ "while true; do sleep 30; done;" ]
         volumeMounts:
-          - name: loadtest
-            mountPath: /load_test
-            subPath: "load_test"
+          - name: {{ .Values.images.master.volumeMounts_name }}
+            mountPath: /{{ .Values.images.master.volumeMounts_mountPath }}
+            subPath: '{{ .Values.images.master.volumeMounts_mountPath }}'
         ports:
-        - containerPort: 60000
+        - containerPort: {{ .Values.images.master.containerPort }}
       volumes:
-      - name: loadtest 
+      - name: {{ .Values.images.master.volumeMounts_name }}
         configMap:
-         name: jmeter-load-test
+         name: {{ .Values.images.master.volume_configMap_name }}

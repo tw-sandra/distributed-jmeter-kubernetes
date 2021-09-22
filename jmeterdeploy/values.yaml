@@ -9,8 +9,24 @@ images:
     repo:  kubernautslabs/jmeter_master
     tag: latest
     pullPolicy: Always
+    name: jmeter-master
+    jmeter_mode: master
+    replica: 1
+    volumeMounts_name: loadtest
+    volumeMounts_mountPath: load_test
+    containerPort: 60000
+    volume_configMap_name: jmeter-load-test
+    configmap_metadata_app: influx-jmeter
   slave:
     repo:  kubernautslabs/jmeter_slave
     tag: latest
     pullPolicy: Always
     replica: 2
+    name: jmeter-slaves
+    jmeter_mode: slave
+
+grafana:
+  enabled: false
+
+influx:
+  enabled: false

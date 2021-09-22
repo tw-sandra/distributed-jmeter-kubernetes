@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: jmeter-slaves-svc
+  name: {{ .Values.images.slave.name }}-svc
   labels:
-    jmeter_mode: slave
+    jmeter_mode: {{ .Values.images.slave.jmeter_mode }}
 spec:
   clusterIP: None
   ports:
@@ -14,4 +14,4 @@ spec:
       name: second
       targetPort: 50000
   selector:
-    jmeter_mode: slave
+    jmeter_mode: {{ .Values.images.slave.jmeter_mode }}

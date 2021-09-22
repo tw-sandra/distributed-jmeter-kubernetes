@@ -1,3 +1,4 @@
+{{- if .Values.influx.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19,3 +20,4 @@ data:
     enabled = true
     bind-address = ":2003" # If not set, is actually set to bind-address.
     database = "jmeter"  # store graphite data in this database
+    {{- end }}

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: jmeter-load-test
+  name:  {{ .Values.images.master.volume_configMap_name }}
   labels:
-    app: influxdb-jmeter
+    app: {{ .Values.images.master.configmap_metadata_app }}
 data:
   load_test: |
     #!/bin/bash

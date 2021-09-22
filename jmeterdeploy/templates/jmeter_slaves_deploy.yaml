@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jmeter-slaves
+  name: {{ .Values.images.slave.name }}
   labels:
-    jmeter_mode: slave
+    jmeter_mode: {{ .Values.images.slave.jmeter_mode }}
 spec:
   replicas: {{ .Values.images.slave.replica }}
   selector:
     matchLabels:
-      jmeter_mode: slave
+      jmeter_mode: {{ .Values.images.slave.jmeter_mode }}
   template:
     metadata:
       labels:
-        jmeter_mode: slave
+        jmeter_mode: {{ .Values.images.slave.jmeter_mode }}
     spec:
       containers:
-      - name: jmslave
+      - name: jmeter-{{ .Values.images.slave.jmeter_mode }}
         image: "{{ .Values.images.slave.repo }}:{{ .Values.images.slave.tag }}"
         imagePullPolicy: {{ .Values.images.slave.pullPolicy }}
         ports:
