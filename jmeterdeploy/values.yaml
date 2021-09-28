@@ -6,7 +6,7 @@ imageCredentials:
 # docker image for master and slaves
 images:
   master:
-    repo:  kubernautslabs/jmeter_master
+    repo:  sandrajohn/jmeter_master
     tag: latest
     pullPolicy: Always
     name: jmeter-master
@@ -18,7 +18,7 @@ images:
     volume_configMap_name: jmeter-load-test
     configmap_metadata_app: influx-jmeter
   slave:
-    repo:  kubernautslabs/jmeter_slave
+    repo:  sandrajohn/jmeter_slave
     tag: latest
     pullPolicy: Always
     replica: 2
@@ -30,3 +30,13 @@ grafana:
 
 influx:
   enabled: false
+
+prometheus:
+  enabled: false
+  repo: prom/prometheus
+
+
+node_details:
+  namespace: kubernauts
+
+
